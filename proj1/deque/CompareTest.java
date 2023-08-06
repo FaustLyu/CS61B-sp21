@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CompareTest {
     @Test
@@ -12,7 +13,7 @@ public class CompareTest {
         LinkedListDeque<Integer> lld = new LinkedListDeque<>();
         ArrayDeque<Integer> ad = new ArrayDeque<>();
         for (int i = 0; i < times; i++) {
-            int operator = StdRandom.uniform(9);
+            int operator = StdRandom.uniform(10);
             switch (operator) {
                 case 0: // addFirst
                     lld.addFirst(i);
@@ -49,6 +50,11 @@ public class CompareTest {
                 case 8: // get
                     System.out.println("get(0)");
                     assertEquals(lld.get(0), ad.get(0));
+                    break;
+                case 9: // equals
+                    System.out.println("equals()");
+                    assertTrue(lld.equals(ad));
+                default:
                     break;
             }
         }

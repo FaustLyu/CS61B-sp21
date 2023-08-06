@@ -136,4 +136,16 @@ public class LinkedListDequeTest {
 
 
     }
+    @Test
+    public void getRecursiveTest() {
+        LinkedListDeque<Integer> lld = new LinkedListDeque<>();
+        for (int i = 0; i < 50; i++) {
+            lld.addLast(i);
+        }
+        for (int i = 0; i < lld.size(); i++) {
+            int lldGet = lld.get(i);
+            int lldRecursiveGet = lld.getRecursive(i);
+            assertEquals(lldGet, lldRecursiveGet);
+        }
+    }
 }

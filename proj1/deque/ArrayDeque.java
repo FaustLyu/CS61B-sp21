@@ -2,11 +2,11 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private static int RESIZE_FACTOR = 2;
     private static double USAGE_THRE = 0.25;
     private int size;
-    private T items[];
+    private T[] items;
     private int nextFirst, nextLast;
     public ArrayDeque() {
         items = (T []) new Object[8];
@@ -42,9 +42,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     }
     // Returns whether the queue is empty
     // Interface has already implemented
-//    public boolean isEmpty() {
-//        return size == 0;
-//    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
     // Returns the size of the queue
     public int size() {
         return size;
@@ -63,7 +63,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         if (type == 0 && size == items.length) {
             resize(RESIZE_FACTOR * size);
         }
-        if (type == 1 && size >= 16 && (int)(USAGE_THRE * items.length) >= size) {
+        if (type == 1 && size >= 16 && (int) (USAGE_THRE * items.length) >= size) {
             resize(items.length / RESIZE_FACTOR);
         }
     }
@@ -110,7 +110,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         private int remainingSize;
         private ArrayDeque<T> list;
         private int first;
-        public ArrayIterator(ArrayDeque<T> list) {
+        ArrayIterator(ArrayDeque<T> list) {
             this.remainingSize = list.size;
             this.list = list;
             first = list.nextFirst;
@@ -131,14 +131,15 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     }
     // Check if the two lists ==
     public boolean equals(Object o) {
-        if (!(o instanceof ArrayDeque && ((ArrayDeque<T>) o).size() == this.size))
+        if (o == null || ! (o instanceof Deque)) {
             return false;
-        Iterator<T> oIte = ((ArrayDeque<T>) o).iterator();
-        Iterator<T> tIte = this.iterator();
-        for (T a, b; oIte.hasNext() && tIte.hasNext();) {
-            a = oIte.next();
-            b = tIte.next();
-            if (a != b) {
+        }
+        Deque<T> oq = (Deque<T>) o;
+        if (oq.size() != this.size) {
+            return false;
+        }
+        for (int i = 0; i < this.size; i++) {
+            if (!oq.get(i).equals(this.get(i))) {
                 return false;
             }
         }

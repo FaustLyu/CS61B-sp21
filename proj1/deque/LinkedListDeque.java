@@ -7,15 +7,15 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         private T item;
         private DoubleNode<T> prev;
         private DoubleNode<T> next;
-        public DoubleNode(T item) {
+        DoubleNode(T item) {
             this.item = item;
             next = null;
             prev = null;
         }
-        public DoubleNode(DoubleNode prev, T item, DoubleNode next) {
+        DoubleNode(DoubleNode prev, T item, DoubleNode next) {
             this.item = item;
             this.prev = prev;
-            this. next = next;
+            this.next = next;
         }
     }
     private DoubleNode<T> sentinel;
@@ -42,9 +42,9 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
     // Returns whether the queue is empty
     // Interface has already implemented
-//    public boolean isEmpty() {
-//        return size == 0;
-//    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
     // Returns the size of the queue
     public int size() {
         return size;
@@ -100,7 +100,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
     private T getRecursiveHelper(int index, DoubleNode<T> p) {
         if (index == 0) {
-            return p.item;
+            return p.next.item;
         }
         return getRecursiveHelper(index - 1, p.next);
     }
@@ -112,7 +112,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private class ListIterator<T> implements Iterator<T> {
         private int remainingSize;
         private DoubleNode<T> p;
-        public ListIterator(LinkedListDeque<T> list) {
+        ListIterator(LinkedListDeque<T> list) {
             this.remainingSize = list.size;
             p = list.sentinel.next;
         }
@@ -131,14 +131,15 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
     // Check if the two lists ==
     public boolean equals(Object o) {
-        if (!(o instanceof LinkedListDeque && ((LinkedListDeque<T>) o).size() == this.size))
+        if (o == null || ! (o instanceof Deque)) {
             return false;
-        Iterator<T> oIte = ((LinkedListDeque<T>) o).iterator();
-        Iterator<T> tIte = this.iterator();
-        for (T a, b; oIte.hasNext() && tIte.hasNext();) {
-            a = oIte.next();
-            b = tIte.next();
-            if (a != b) {
+        }
+        Deque<T> oq = (Deque<T>) o;
+        if (oq.size() != this.size) {
+            return false;
+        }
+        for (int i = 0; i < this.size; i++) {
+            if (!oq.get(i).equals(this.get(i))) {
                 return false;
             }
         }
