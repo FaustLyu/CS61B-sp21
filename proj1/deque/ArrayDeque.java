@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T>{
+public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     private static int RESIZE_FACTOR = 2;
     private static double USAGE_THRE = 0.25;
     private int size;
@@ -41,9 +41,10 @@ public class ArrayDeque<T> implements Iterable<T>{
         items = nextItems;
     }
     // Returns whether the queue is empty
-    public boolean isEmpty() {
-        return size == 0;
-    }
+    // Interface has already implemented
+//    public boolean isEmpty() {
+//        return size == 0;
+//    }
     // Returns the size of the queue
     public int size() {
         return size;

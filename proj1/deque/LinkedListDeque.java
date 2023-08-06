@@ -1,9 +1,8 @@
 package deque;
 
-import java.util.Deque;
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Iterable<T> {
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private static class DoubleNode<T> {
         private T item;
         private DoubleNode<T> prev;
@@ -42,9 +41,10 @@ public class LinkedListDeque<T> implements Iterable<T> {
         size += 1;
     }
     // Returns whether the queue is empty
-    public boolean isEmpty() {
-        return size == 0;
-    }
+    // Interface has already implemented
+//    public boolean isEmpty() {
+//        return size == 0;
+//    }
     // Returns the size of the queue
     public int size() {
         return size;
