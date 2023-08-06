@@ -19,7 +19,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
             this. next = next;
         }
     }
-    DoubleNode<T> sentinel;
+    private DoubleNode<T> sentinel;
     private int size;
     public LinkedListDeque() {
         this.sentinel = new DoubleNode<>(null);

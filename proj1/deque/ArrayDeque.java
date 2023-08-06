@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Iterable<T>{
     private static int RESIZE_FACTOR = 2;
     private static double USAGE_THRE = 0.25;
     private int size;
@@ -58,7 +58,7 @@ public class ArrayDeque<T> {
         System.out.println(items[ite]);
     }
     // Check and execute resize()
-    public void checkResize(int type) {
+    private void checkResize(int type) {
         if (type == 0 && size == items.length) {
             resize(RESIZE_FACTOR * size);
         }
