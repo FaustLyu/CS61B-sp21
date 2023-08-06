@@ -130,9 +130,9 @@ public class ArrayDeque<T> implements Iterable<T>{
     }
     // Check if the two lists ==
     public boolean equals(Object o) {
-        if (!(o instanceof LinkedListDeque && ((LinkedListDeque<T>) o).size() == this.size))
+        if (!(o instanceof ArrayDeque && ((ArrayDeque<T>) o).size() == this.size))
             return false;
-        Iterator<T> oIte = ((LinkedListDeque<T>) o).iterator();
+        Iterator<T> oIte = ((ArrayDeque<T>) o).iterator();
         Iterator<T> tIte = this.iterator();
         for (T a, b; oIte.hasNext() && tIte.hasNext();) {
             a = oIte.next();
