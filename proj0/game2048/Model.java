@@ -121,13 +121,19 @@ public class Model extends Observable {
                 if (top != null) {
                     for (int row_l = row - 1; row_l >= 0; row_l--) {
                         Tile t = tile(col, row_l);
-                        if (t != null && t.value() == top.value()) {
-                            score += 2 * t.value();
-                            board.move(col, row, t);
-                            changed = true;
+                        if (t != null) {
+                            if (t.value() == top.value()) {
+                                score += 2 * t.value();
+                                board.move(col, row, t);
+                                changed = true;
 //                            row = row_l;
-                            break;
+                                break;
+                            } else {
+                                row = row_l;
+                                top = tile(col, row);
+                            }
                         }
+
                     }
                 }
             }
